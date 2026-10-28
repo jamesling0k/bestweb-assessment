@@ -46,7 +46,6 @@ docker compose exec -T app composer test
 
 Tests use the separate `bestweb_testing` MySQL database, created during Docker setup. The suite covers authentication, permissions, product validation, filtering, pagination, updates, soft deletion, bulk deletion and Excel exports.
 
-Latest result: 45 tests passed, 230 assertions. Manual checks of the dashboard, catalog, Swagger authentication and logout also passed.
 
 ## API
 
@@ -66,11 +65,4 @@ For other clients, send `Accept: application/json` and `Authorization: Bearer <t
 
 Product fields: `name`, `category_id`, `description`, `price`, `stock`, `enabled`. Responses include `category_id` and `category_name`. Full request and response examples are available in Swagger and `public/openapi.json`. The Swagger viewer needs internet access to load its assets.
 
-## Implementation notes
 
-- Standard Laravel MVC with Form Requests for validation, Eloquent relationships and API Resources. The dashboard uses session authentication; the API uses Sanctum. Both require an administrator.
-- The frontend requirement is implemented as a public product list and detail page. Only enabled, non-deleted products are shown.
-- Electronics, Office and Home categories are seeded. Category management is outside the requested scope.
-- Single and bulk deletion use soft deletes. Excel export includes all non-deleted products matching the dashboard filters, across all pages.
-
-Local `.env` files, dependencies, logs and caches are excluded from Git. Database records are stored in the Docker volume.
